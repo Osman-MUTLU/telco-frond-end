@@ -1,0 +1,20 @@
+.background-image{
+    background-image: url("./bg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+.content{
+
+    width: 500px;
+    height: 500px;
+    background-color: aliceblue;
+    position: fixed;
+}
