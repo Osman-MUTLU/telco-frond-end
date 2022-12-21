@@ -11,3 +11,11 @@ export const setResultData = (data) => {
     sessionStorage.setItem('result', JSON.stringify(data))
 }
 
+export const getQuestionsData = () => {
+    const result = sessionStorage.getItem('questions')
+    return JSON.parse(result)
+}
+
+export const setQuestionsData = (data) => {
+    sessionStorage.setItem('questions', JSON.stringify(data))
+}

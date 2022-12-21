@@ -16,7 +16,7 @@ function Layout() {
                     <div className='background-image'>
                         <Container>
                             <div className="content">
-                                home
+                                <Outlet />
                             </div>
                         </Container>
                         

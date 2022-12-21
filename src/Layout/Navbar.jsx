@@ -1,10 +1,11 @@
 import { AppBar, Container } from '@mui/material'
 import React from 'react'
 import './Navbar.css'
+import { useNavigate } from 'react-router-dom'
 
 function Navbar() {
 
-    
+    const navigate = useNavigate()
 
     const selectHomeHandler = () => {
         // toggle class active home-btn id
@@ -12,6 +13,7 @@ function Navbar() {
         const statisticBtn = document.getElementById('statistic-btn')
         homeBtn.classList.add('selected')
         statisticBtn.classList.remove('selected')
+        navigate('/')
     }
     const selectStatisticHandler = () => {
         // toggle class active home-btn id
@@ -19,7 +21,7 @@ function Navbar() {
         const homeBtn = document.getElementById('home-btn')
         statisticBtn.classList.add('selected')
         homeBtn.classList.remove('selected')
-        
+        navigate('/statistic')
     }
 
     return (
@@ -29,10 +31,10 @@ function Navbar() {
             <Container maxWidth="xl">
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '64px' }}>
                     <div id="home-btn" className="nav-button selected" onClick={selectHomeHandler}>
-                        Logo
+                        Predict
                     </div>
                     <div id="statistic-btn" className="nav-button" onClick={selectStatisticHandler}>
-                        Logo
+                        Statistic
                     </div>
                 </div>
                 

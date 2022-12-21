@@ -4,6 +4,7 @@
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
+    margin-top: 65px;
     height: 100vh;
     width: 100vw;
     position: fixed;
@@ -12,9 +13,9 @@
     z-index: -1;
 }
 .content{
-
-    width: 500px;
-    height: 500px;
-    background-color: aliceblue;
-    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 50px 0;
 }

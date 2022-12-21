@@ -1,8 +1,10 @@
 import React from 'react'
+import { getQuestionsData } from '../Utils/Common'
 
 function Result() {
+  const questions = getQuestionsData()
   return (
-    <div>Result</div>
+    <div>{questions[0]?.questionText}</div>
   )
 }
 

@@ -1,20 +1,18 @@
-
-
 .nav-button{
-    background-color: #000000;
-    color: #ffffff;
-    border: 1px solid #ffffff;
-    border-radius: 5px;
+    color: #1976d2;
+    opacity: 0.4;
     padding: 5px;
     margin: 5px;
     text-decoration: none;
-    font-size: 1.2em;
+    font-size: 1.5em;
     font-weight: bold;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     cursor: pointer;
-    transition: 0.5s;
+    transition: 0.3s;
 }
 .nav-button.selected{
-    background-color: #ffffff;
-    color: #000000;
+    opacity: 1;
+    border-bottom: #1976d2 3px solid;
+    border-radius: 0;
+    
 }
