@@ -25,8 +25,6 @@ function Result() {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-
-      
       }}>
 
           <GaugeChart id="gauge-chart1"

@@ -106,13 +106,6 @@ function Home() {
               }} {...params} />}
             />
           </LocalizationProvider>
-          <br />
-          <Typography variant="body2" color="text.secondary" style={{
-            textAlign: 'center',
-          }}>
- 
-            {question.answer?.format('DD/MM/YYYY')}
-          </Typography>
         </>
         );
       default:

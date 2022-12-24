@@ -6,6 +6,14 @@ import { useNavigate } from 'react-router-dom'
 function Navbar() {
 
     const navigate = useNavigate()
+    React.useEffect(() => {
+        if (window.location.pathname === '/') {
+            selectHomeHandler()
+        } else {
+            selectStatisticHandler()
+        }
+    }, [])
+
 
     const selectHomeHandler = () => {
         // toggle class active home-btn id
@@ -31,10 +39,10 @@ function Navbar() {
             <Container maxWidth="xl">
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '64px' }}>
                     <div id="home-btn" className="nav-button selected" onClick={selectHomeHandler}>
-                        Predict
+                        PREDICT
                     </div>
                     <div id="statistic-btn" className="nav-button" onClick={selectStatisticHandler}>
-                        Statistic
+                        STATISTIC
                     </div>
                 </div>
                 
