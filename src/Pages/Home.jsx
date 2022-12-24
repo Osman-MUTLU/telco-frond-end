@@ -11,24 +11,29 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import CheckIcon from '@mui/icons-material/Check';
 import { useNavigate } from 'react-router-dom';
-import { setQuestionsData } from '../Utils/Common';
+import { setQuestionsData,setResultData } from '../Utils/Common';
 
 
 
 
 function Home() {
   const maxDate = dayjs().subtract(1, 'year');
-  const [answerList, setAnswerList] = React.useState([maxDate,0,0,0,0,0,0,0,0,0,0,0,0,0]);
+  const [answerList, setAnswerList] = React.useState([
+    maxDate,'true','true',0,'DSL',
+    'true','true','Month-to-month','true','Electronic check',0,0,0]);
   const navigate = useNavigate();
   function componentSelector(question, index) {
     const { componentType } = question.answerSettings;
     switch (componentType) {
       case "input":
-        return <h1>
+        return <>
           <Input
             id={"input-" + index}
             label="Number"
             type="number"
+            style={{ 
+              fontSize: '1.5rem',
+            }}
             value={answerList[index]}
             onChange={(e) => {
               let newAnswerList = [...answerList];
@@ -36,15 +41,14 @@ function Home() {
               setAnswerList(newAnswerList);
             }}
           />
-          <br />
-          {question.answer}
-        </h1>;
+        </>;
       case "select":
         return (<>
           <FormControl sx={{ m: 1, minWidth: 120 }}>
             <Select
               id={"select-" + index}
               value={answerList[index]}
+              style={{ fontSize: '1rem' }}
               onChange={(e) => {
                 let newAnswerList = [...answerList];
                 newAnswerList[index] = e.target.value;
@@ -52,7 +56,7 @@ function Home() {
               }}
             >
               {question.answerOptions.map((option) => (
-                <MenuItem value={option.value}>{option.answerText}</MenuItem>
+                <MenuItem value={option.value} >{option.answerText}</MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -71,11 +75,15 @@ function Home() {
                 setAnswerList(newAnswerList);
               }}>
               {question.answerOptions.map((option) => (
-                <FormControlLabel value={option.value} control={<Radio />} label={option.answerText} />
+                <FormControlLabel style={
+                  {
+                    fontSize: '1.5rem',
+                    textAlign: 'center',
+                  }
+                } value={option.value} control={<Radio/>} label={option.answerText} />
               ))}
             </RadioGroup>
           </FormControl>
-          {question.answer}
         </>
         )
       case "datePicker":
@@ -92,12 +100,23 @@ function Home() {
                 newAnswerList[index] = newValue;
                 setAnswerList(newAnswerList);
               }}
-              renderInput={(params) => <Input {...params} />}
+              renderInput={(params) => <Input style={{ 
+                fontSize: '1.5rem',
+                textAlign: 'center',
+              }} {...params} />}
             />
           </LocalizationProvider>
-          {question.answer?.format('DD/MM/YYYY')}
+          <br />
+          <Typography variant="body2" color="text.secondary" style={{
+            textAlign: 'center',
+          }}>
+ 
+            {question.answer?.format('DD/MM/YYYY')}
+          </Typography>
         </>
         );
+      default:
+        return <></>;
     }
   }
   let questions = [
@@ -113,11 +132,11 @@ function Home() {
     },
     {
       questionText: 'Does the customer have a partner?',
-      questionKey:"Partner_1.0",
+      questionKey:"hasPartner",
       answer: answerList[1],
       answerOptions: [
-        { answerText: 'True', value: 1 },
-        { answerText: 'False', value: 0 },
+        { answerText: 'True', value: "true" },
+        { answerText: 'False', value: "false" },
       ],
       answerSettings:
       {
@@ -127,11 +146,11 @@ function Home() {
     },
     {
       questionText: 'Does the customer have an dependents?',
-      questionKey:"Dependents_1.0",
+      questionKey:"hasDependents",
       answer: answerList[2],
       answerOptions: [
-        { answerText: 'True', value: 1 },
-        { answerText: 'False', value: 0 },
+        { answerText: 'True', value: "true" },
+        { answerText: 'False', value: "false" },
       ],
       answerSettings:
       {
@@ -154,26 +173,26 @@ function Home() {
     },
     {
       questionText: 'Does the customer have internet service?',
-      questionKey:"InternetService_1.0",
+      questionKey:"InternetService",
       answer: answerList[4],
       answerOptions: [
-        { answerText: 'DSL', value: 2 },
-        { answerText: 'Fiber optic', value: 1 },
-        { answerText: 'No', value: 0 },
+        { answerText: 'DSL', value: 'DSL' },
+        { answerText: 'Fiber optic', value: 'Fiber optic' },
+        { answerText: 'No', value: 'No' },
       ],
       answerSettings:
       {
-        answerType: 'int',
+        answerType: 'string',
         componentType: "select",
       },
     },
     {
       questionText: 'Does the customer have online security?',
-      questionKey:"OnlineSecurity_1.0",
+      questionKey:"hasOnlineSecurity",
       answer: answerList[5],
       answerOptions: [
-        { answerText: 'True', value: 1 },
-        { answerText: 'False', value: 0 },
+        { answerText: 'True', value: 'true' },
+        { answerText: 'False', value: 'false' },
       ],
       answerSettings:
       {
@@ -183,11 +202,11 @@ function Home() {
     },
     {
       questionText: 'Does the customer have tech support?',
-      questionKey:"TechSupport_1.0",
+      questionKey:"hasTechSupport",
       answer: answerList[6],
       answerOptions: [
-        { answerText: 'True', value: 1 },
-        { answerText: 'False', value: 0 },
+        { answerText: 'True', value: "true" },
+        { answerText: 'False', value: "false" },
       ],
       answerSettings:
       {
@@ -197,26 +216,26 @@ function Home() {
     },
     {
       questionText: "How long is the customer's contract period?",
-      questionKey:"Contract",
-      value: answerList[7],
+      questionKey:"contractType",
+      answer: answerList[7],
       answerOptions: [
-        { answerText: 'Month-to-month', value: 0 },
-        { answerText: 'One year', value: 1 },
-        { answerText: 'Two year', value: 2 },
+        { answerText: 'Month-to-month', value: 'Month-to-month' },
+        { answerText: 'One year', value: 'One year' },
+        { answerText: 'Two year', value: 'Two year' },
       ],
       answerSettings:
       {
-        answerType: 'int',
+        answerType: 'string',
         componentType: "select",
       },
     },
     {
       questionText: 'Does the customer have paperless billing?',
-      questionKey:"PaperlessBilling_1.0",
+      questionKey:"paperlessBilling",
       answer: answerList[8],
       answerOptions: [
-        { answerText: 'True', value: 1 },
-        { answerText: 'False', value: 0 },
+        { answerText: 'True', value: "true" },
+        { answerText: 'False', value: "false" },
       ],
       answerSettings:
       {
@@ -226,23 +245,23 @@ function Home() {
     },
     {
       questionText: 'What is the payment method of the customer?',
-      questionKey:"PaymentMethod",
+      questionKey:"paymentMethod",
       answer: answerList[9],
       answerOptions: [
-        { answerText: 'Electronic check', value: 0 },
-        { answerText: 'Mailed check', value: 1 },
-        { answerText: 'Bank transfer (automatic)', value: 2 },
-        { answerText: 'Credit card (automatic)', value: 3 },
+        { answerText: 'Electronic check', value: 'Electronic check' },
+        { answerText: 'Mailed check', value: 'Mailed check' },
+        { answerText: 'Bank transfer (automatic)', value: 'Bank transfer (automatic)' },
+        { answerText: 'Credit card (automatic)', value: 'Credit card (automatic)' },
       ],
       answerSettings:
       {
-        answerType: 'int',
+        answerType: 'string',
         componentType: "select",
       },
     },
     {
       questionText: 'What is the monthly charge of the customer?',
-      questionKey:"MonthlyCharges",
+      questionKey:"monthlyCharges",
       answer: answerList[10],
       answerSettings:
       {
@@ -252,7 +271,7 @@ function Home() {
     },
     {
       questionText: 'What is the total charge of the customer?',
-      questionKey:"TotalCharges",
+      questionKey:"totalCharges",
       answer: answerList[11],
       answerSettings:
       {
@@ -260,13 +279,34 @@ function Home() {
         componentType: "input",
       },
     },
-
-
+    {
+      questionText: 'What is the total service of the customer?',
+      questionKey:"totalServices",
+      answer: answerList[12],
+      answerOptions: [
+        { answerText: '0', value: 0 },
+        { answerText: '1', value: 1 },
+        { answerText: '2', value: 2 },
+        { answerText: '3', value: 3 },
+        { answerText: '4', value: 4 },
+        { answerText: '5', value: 5 },
+        { answerText: '6', value: 6 },
+        { answerText: '7+', value: 7 },
+      ],
+      answerSettings:
+      {
+        answerType: 'int',
+        componentType: "select",
+      },
+    },
   ]
+  React.useEffect(() => {
+    setResultData(null)
+  }, [])
 
   const steps = questions.map((question, index) => {
     return {
-      label: 'Customer Information - ' + (index + 1) + '/12',
+      label: 'Customer Information - ' + (index + 1) + '/' + questions.length,
       questionText: question.questionText,
       questionComponent: componentSelector(question, index),
     }
@@ -312,13 +352,24 @@ function Home() {
             bgcolor: 'background.dark',
           }}
         >
-          <Typography>{steps[activeStep].label}</Typography>
+          <Typography 
+            variant="h5"
+            sx={{
+              color:"#1976d2",
+              alignItems: 'center',
+              justifyContent: 'center',
+              }}
+
+          >{steps[activeStep].label}</Typography>
         </Paper>
         <Box sx={{ height: 255, width: '90%', p: 2 }}>
           <Typography variant="h5">
-            {steps[activeStep].questionText}
-          </Typography>
-          {steps[activeStep].questionComponent}
+            {activeStep+1 + ". " + steps[activeStep].questionText}
+          </Typography> 
+          <br />
+          <Box>
+            {steps[activeStep].questionComponent}
+          </Box>
         </Box>
         <MobileStepper
           variant="progress"
