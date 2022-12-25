@@ -75,7 +75,7 @@ function Statistic() {
           <img
             src={images[activeStep].imgPath}
             alt={images[activeStep].label}
-            style={{ width: '1000px', height: '400px' }}
+            style={{ width: '800px', height: '320px' }}
           />
           <Typography variant="h4" component="div" sx={{ flexGrow: 1,textAlign:"center",mt:3 }}>
             {images[activeStep].label}

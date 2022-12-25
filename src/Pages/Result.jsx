@@ -31,7 +31,7 @@ function Result() {
             style={{ width: '400px' }}
 
             nrOfLevels={3}
-            percent={loading? 0 : result?.prediction_proba}
+            percent={loading? 0.01 : result?.prediction_proba}
             textColor="#000"
             needleColor="#000"
             needleBaseColor="#000"

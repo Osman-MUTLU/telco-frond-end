@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { getQuestionsData, setResultData } from './Common';
 
-const API_URL = 'http://localhost:8000/';
+const API_URL = 'https://telcobck.journml.net/';
 const axiosConfig = {
     headers: {
         'Content-Type': 'application/json',
